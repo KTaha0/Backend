@@ -8,6 +8,12 @@ const schema = z.object({
   DB_USER: z.string().min(1),
   DB_PASSWORD: z.string().min(1),
   DB_NAME: z.string().min(1),
+
+  JWT_ACCESS_SECRET: z.string().min(32),
+  JWT_ACCESS_EXPIRE: z.string().min(1),
+
+  JWT_REFRESH_SECRET: z.string().min(32),
+  JWT_REFRESH_EXPIRE: z.string().min(1),
 });
 
 const result = schema.safeParse(process.env);
@@ -30,5 +36,13 @@ export const env = {
     user: validatedEnv.DB_USER,
     password: validatedEnv.DB_PASSWORD,
     name: validatedEnv.DB_NAME,
+  },
+
+  jwt: {
+    accessSecret: validatedEnv.JWT_ACCESS_SECRET,
+    accessExpire: validatedEnv.JWT_ACCESS_EXPIRE,
+
+    refreshSecret: validatedEnv.JWT_REFRESH_SECRET,
+    refreshExpire: validatedEnv.JWT_REFRESH_EXPIRE,
   },
 };
